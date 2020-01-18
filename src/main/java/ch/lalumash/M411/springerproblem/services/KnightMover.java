@@ -1,22 +1,24 @@
-package ch.lalumash.M411.springerproblem;
+package ch.lalumash.M411.springerproblem.services;
 
+import ch.lalumash.M411.springerproblem.model.Board;
+import ch.lalumash.M411.springerproblem.model.Position;
 import lombok.Getter;
 
 import java.util.Stack;
 
 @Getter
-public class Problem {
+public class KnightMover {
     private Board board;
 
-    public Problem() {
+    public KnightMover() {
         this.board = new Board(8);
     }
 
-    public Problem(int dimension) {
+    public KnightMover(int dimension) {
         this.board = new Board(dimension);
     }
 
-    public Problem(Board board) {
+    public KnightMover(Board board) {
         this.board = board;
     }
 

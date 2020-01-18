@@ -1,4 +1,4 @@
-package ch.lalumash.M411.springerproblem;
+package ch.lalumash.M411.springerproblem.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

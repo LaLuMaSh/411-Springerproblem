@@ -1,4 +1,4 @@
-package ch.lalumash.M411.springerproblem;
+package ch.lalumash.M411.springerproblem.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -13,7 +13,6 @@ public class Position implements Cloneable {
     private int y;
     @Setter(AccessLevel.PROTECTED)
     private boolean visited;
-    @Getter(AccessLevel.PRIVATE)
     private transient Board board;
     @Getter(AccessLevel.PRIVATE)
     private List<Position> positions;

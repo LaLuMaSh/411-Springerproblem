@@ -1,7 +1,7 @@
 package ch.lalumash.M411.springerproblem.tests;
 
-import ch.lalumash.M411.springerproblem.Board;
-import ch.lalumash.M411.springerproblem.Position;
+import ch.lalumash.M411.springerproblem.model.Board;
+import ch.lalumash.M411.springerproblem.model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

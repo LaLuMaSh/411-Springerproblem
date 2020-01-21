@@ -1,29 +1,51 @@
 package ch.lalumash.M411.springerproblem.controller;
 
+import ch.lalumash.M411.springerproblem.dtos.BoardDto;
+import ch.lalumash.M411.springerproblem.model.Path;
 import ch.lalumash.M411.springerproblem.services.KnightMover;
-import ch.lalumash.M411.springerproblem.model.Position;
-import ch.lalumash.M411.springerproblem.services.BoardConverter;
+import ch.lalumash.M411.springerproblem.services.PathConverter;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/board/")
 @CrossOrigin(origins = {"*"})
 public class BoardController {
 
-    public BoardController() {
-        System.out.println("hallo");
-    }
-
     @GetMapping("get")
-    public int[][] getBoard(@RequestParam Integer x, @RequestParam Integer y, @RequestParam(required = false) Integer dimensions) {
+    public BoardDto getBoard(@RequestParam Integer x, @RequestParam Integer y, @RequestParam(required = false) Integer dimensions) {
         if (dimensions == null) {
             dimensions = 8;
         }
         KnightMover knightMover = new KnightMover(dimensions);
-        Stack<Position> positions =knightMover.solve(new Stack<>(), x, y);
+        Path path =knightMover.get(x, y);
 
-        return BoardConverter.getInstance().convert(positions);
+        if (path == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine möglichkeiten gefunden.");
+        }
+
+        return PathConverter.getInstance().convert(path);
+    }
+    @GetMapping("getAll")
+    public List<BoardDto> getAll(@RequestParam Integer x, @RequestParam Integer y, @RequestParam(required = false) Integer dimensions) {
+        if (dimensions == null) {
+            dimensions = 8;
+        }
+        KnightMover knightMover = new KnightMover(dimensions);
+        List<Path> paths =knightMover.getAll(x, y);
+        if (paths.size() == 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine möglichkeiten gefunden.");
+        }
+
+        List<BoardDto> results = new ArrayList<>();
+
+        for (Path path : paths) {
+            results.add(PathConverter.getInstance().convert(path));
+        }
+        return results;
     }
 }

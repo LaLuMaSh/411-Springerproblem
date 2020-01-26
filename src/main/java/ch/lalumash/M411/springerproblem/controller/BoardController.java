@@ -11,6 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Basic RestController for getting one board or all possible boards.
+ */
 @RestController
 @RequestMapping("api/board/")
 @CrossOrigin(origins = {"*"})
@@ -22,7 +25,7 @@ public class BoardController {
             dimensions = 8;
         }
         KnightMover knightMover = new KnightMover(dimensions);
-        Path path =knightMover.get(x, y);
+        Path path = knightMover.get(x, y);
 
         if (path == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine möglichkeiten gefunden.");
@@ -30,13 +33,14 @@ public class BoardController {
 
         return PathConverter.getInstance().convert(path);
     }
+
     @GetMapping("getAll")
     public List<BoardDto> getAll(@RequestParam Integer x, @RequestParam Integer y, @RequestParam(required = false) Integer dimensions) {
         if (dimensions == null) {
             dimensions = 8;
         }
         KnightMover knightMover = new KnightMover(dimensions);
-        List<Path> paths =knightMover.getAll(x, y);
+        List<Path> paths = knightMover.getAll(x, y);
         if (paths.size() == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine möglichkeiten gefunden.");
         }

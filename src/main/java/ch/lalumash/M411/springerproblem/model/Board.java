@@ -14,7 +14,7 @@ public class Board implements Cloneable, Iterable<Position> {
     private int dimensions;
 
     public Board(int dimensions) {
-        this.positionsList = new ArrayList<Position>();
+        this.positionsList = new ArrayList<>();
         this.positions = new Position[dimensions][dimensions];
         this.dimensions = dimensions;
         for (int x = 0; x < dimensions; x++) {
@@ -36,7 +36,7 @@ public class Board implements Cloneable, Iterable<Position> {
     }
 
     public boolean isInBoard(int x, int y) {
-        return x >= 0 && x <= dimensions-1 && y >= 0 && y <= dimensions-1;
+        return x >= 0 && x <= dimensions - 1 && y >= 0 && y <= dimensions - 1;
     }
 
     public boolean canBeJumpedTo(int x, int y) {

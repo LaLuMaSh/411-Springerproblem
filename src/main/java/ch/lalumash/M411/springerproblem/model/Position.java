@@ -7,6 +7,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a position  on a Board.
+ */
 @Getter
 public class Position implements Cloneable {
     private int x;
@@ -28,6 +31,12 @@ public class Position implements Cloneable {
         visited = true;
     }
 
+    /**
+     * this Method is used to get all Positions from the current position.
+     * This Method caches the positions once they are created.
+     *
+     * @return the List of all Position on the Board that the knight can move to.
+     */
     public List<Position> getPossiblePositions() {
         if (positions == null) {
             List<Position> result = new ArrayList<Position>();
@@ -52,6 +61,7 @@ public class Position implements Cloneable {
     public Position clone() {
         return new Position(this.getX(), this.getY(), this.board);
     }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Position)) {
@@ -61,6 +71,7 @@ public class Position implements Cloneable {
 
         return pos.getY() == this.getY() && pos.getX() == this.getX();
     }
+
     @Override
     public String toString() {
         return "[" + this.getX() + ";" + this.getY() + "]";

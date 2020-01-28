@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * The Class representing a scalable Chess board.
+ */
 public class Board implements Cloneable, Iterable<Position> {
 
     private Position[][] positions;
@@ -26,6 +29,11 @@ public class Board implements Cloneable, Iterable<Position> {
         }
     }
 
+    /**
+     * @param x the x Position on the Board.
+     * @param y the y Position on the Board.
+     * @return the Position, if it is not on the board, it will throw a IllegalArgumentException.
+     */
     public Position get(int x, int y) {
 
         if (!isInBoard(x, y)) {
@@ -35,27 +43,28 @@ public class Board implements Cloneable, Iterable<Position> {
         return positions[x][y];
     }
 
+    /**
+     * checks if a position is on the Board.
+     * @param x the x Position.
+     * @param y the y Position.
+     * @return if the Position is on the Board.
+     */
     public boolean isInBoard(int x, int y) {
         return x >= 0 && x <= dimensions - 1 && y >= 0 && y <= dimensions - 1;
     }
 
-    public boolean canBeJumpedTo(int x, int y) {
-        if (!isInBoard(x, y)) {
-            return false;
-        }
-        return !positions[x][y].isVisited();
-    }
-
+    /**
+     * @return the Cloned Board.
+     */
     @Override
     public Board clone() {
-        Board board = new Board(this.dimensions);
-
-        for (Position position : board) {
-            position.setVisited(this.get(position.getX(), position.getY()).isVisited());
-        }
-        return board;
+        return new Board(this.dimensions);
     }
 
+    /**
+     * allows to iterate over the board.
+     * @return the Iterator of the Position List.
+     */
     public Iterator<Position> iterator() {
         return positionsList.iterator();
     }

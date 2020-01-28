@@ -5,6 +5,9 @@ import lombok.Getter;
 
 import java.util.Stack;
 
+/**
+ * Class representing a Stack of all Positions in to represent a Path, and a Dimension.
+ */
 @AllArgsConstructor
 @Getter
 public class Path {

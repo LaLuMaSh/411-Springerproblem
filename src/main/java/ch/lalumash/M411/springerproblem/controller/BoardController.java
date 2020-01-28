@@ -24,11 +24,16 @@ public class BoardController {
         if (dimensions == null) {
             dimensions = 8;
         }
+
+        if (x < 0 || y <  0 || x >= dimensions || y >= dimensions) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Position nicht auf dem Feld. ");
+        }
+
         KnightMover knightMover = new KnightMover(dimensions);
         Path path = knightMover.get(x, y);
 
         if (path == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine möglichkeiten gefunden.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Keine Möglichkeiten gefunden.");
         }
 
         return PathConverter.getInstance().convert(path);
@@ -39,6 +44,11 @@ public class BoardController {
         if (dimensions == null) {
             dimensions = 8;
         }
+
+        if (x < 0 | y <  0 | x >= dimensions || y >= dimensions) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Position nicht auf dem Feld. ");
+        }
+
         KnightMover knightMover = new KnightMover(dimensions);
         List<Path> paths = knightMover.getAll(x, y);
         if (paths.size() == 0) {

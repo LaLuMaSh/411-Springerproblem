@@ -14,21 +14,19 @@ import java.util.List;
 public class Position implements Cloneable {
     private int x;
     private int y;
-    @Setter(AccessLevel.PROTECTED)
-    private boolean visited;
     private transient Board board;
     @Getter(AccessLevel.PRIVATE)
-    private List<Position> positions;
+    private transient List<Position> positions;
 
+    /**
+     * @param x the positions x value.
+     * @param y the positions x value.
+     * @param board the board where the position is located.
+     */
     public Position(int x, int y, Board board) {
         this.x = x;
         this.y = y;
-        this.visited = false;
         this.board = board;
-    }
-
-    public void visit() {
-        visited = true;
     }
 
     /**
